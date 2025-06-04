@@ -1,0 +1,54 @@
+/* Comment Section Styles */
+.comment-section {
+    margin: 15px 0;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+}
+
+.comment-textarea {
+    width: 100%;
+    min-height: 60px;
+    padding: 8px;
+    border: 1px solid rgba(221, 221, 221, 0.7);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.8);
+    font-size: 0.9em;
+    resize: vertical;
+    transition: all 0.3s ease;
+    color: #333;
+}
+
+.comment-textarea:hover {
+    border-color: #c1272d;
+    box-shadow: 0 0 10px rgba(193, 39, 45, 0.3);
+}
+
+.comment-textarea:focus {
+    outline: none;
+    border-color: #c1272d;
+    box-shadow: 0 0 15px rgba(193, 39, 45, 0.4);
+}
+
+/* Status Select Styles */
+.status-select {
+    padding: 8px 12px;
+    border: 1px solid rgba(221, 221, 221, 0.7);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.8);
+    font-size: 0.9em;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.status-select:hover {
+    border-color: #c1272d;
+    box-shadow: 0 0 10px rgba(193, 39, 45, 0.3);
+}
+
+.status-select:focus {
+    outline: none;
+    border-color: #c1272d;
+    box-shadow: 0 0 15px rgba(193, 39, 45, 0.4);
+} 
