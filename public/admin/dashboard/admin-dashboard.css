@@ -1,0 +1,48 @@
+@import url('../../assets/css/theme.css');
+
+.dashboard-container h1 {
+    color: #8f162a;
+    margin-bottom: 8px;
+}
+
+.dashboard-container p {
+    color: #59667a;
+}
+
+.complaint-list {
+    margin-top: 16px;
+}
+
+.complaint-item {
+    background: rgba(255, 255, 255, 0.88);
+    border: 1px solid rgba(31, 41, 51, 0.08);
+    border-radius: 14px;
+    padding: 14px;
+    margin-bottom: 12px;
+}
+
+.complaint-item h3 {
+    color: #8f162a;
+    margin-bottom: 6px;
+}
+
+.complaint-item p {
+    color: #1f2933;
+    margin: 4px 0;
+}
+
+.complaint-item .actions {
+    margin-top: 10px;
+    display: flex;
+    gap: 8px;
+}
+
+.complaint-item .actions button.resolve {
+    background: linear-gradient(180deg, #1f8f56, #196f43);
+    color: #fff;
+}
+
+.complaint-item .actions button.reject {
+    background: linear-gradient(180deg, #b31b34, #8f162a);
+    color: #fff;
+}

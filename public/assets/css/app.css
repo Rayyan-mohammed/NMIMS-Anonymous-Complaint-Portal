@@ -1,0 +1,167 @@
+@import url('./theme.css');
+
+.container {
+    max-width: 900px;
+}
+
+header {
+    border-bottom: 1px solid rgba(31, 41, 51, 0.12);
+    padding-bottom: 16px;
+}
+
+header h1 {
+    font-size: 2rem;
+}
+
+.form-group.anonymous-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border: 1px dashed rgba(14, 90, 102, 0.34);
+    border-radius: 12px;
+    background: rgba(14, 90, 102, 0.06);
+}
+
+.form-group.anonymous-checkbox label {
+    margin: 0;
+    font-weight: 600;
+}
+
+input[type="checkbox"] {
+    accent-color: #0e5a66;
+    width: 18px;
+    height: 18px;
+}
+
+#confirmationMessage {
+    margin-top: 18px;
+    text-align: center;
+    padding: 20px;
+    display: none;
+    border: 1px solid rgba(31, 143, 86, 0.25);
+    border-radius: 14px;
+    background: rgba(31, 143, 86, 0.08);
+}
+
+#confirmationMessage h2 {
+    color: #1f8f56;
+    margin-bottom: 8px;
+}
+
+#referenceNumber {
+    color: #7a1024;
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+}
+
+#copyReferenceBtn {
+    margin-top: 10px;
+    width: auto;
+    padding: 10px 16px;
+    background: linear-gradient(180deg, #1f8f56, #196f43);
+}
+
+#copyStatus {
+    min-height: 20px;
+    margin-top: 8px;
+    font-weight: 700;
+    color: #196f43;
+}
+
+#confirmationMessage .check-status a {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 14px;
+    border-radius: 999px;
+    text-decoration: none;
+    color: #fff;
+    background: linear-gradient(180deg, #0e6d82, #0b5768);
+}
+
+#newComplaintBtn {
+    margin-top: 14px;
+    width: auto;
+    padding: 10px 16px;
+}
+
+.university-logo {
+    text-align: center;
+    margin: 0 0 16px;
+}
+
+.university-logo img {
+    max-width: 230px;
+    height: auto;
+    filter: drop-shadow(0 8px 15px rgba(20, 33, 48, 0.18));
+}
+
+.form-group fieldset {
+    border: 1px solid rgba(31, 41, 51, 0.15);
+    border-radius: 10px;
+    padding: 10px 12px;
+}
+
+.form-group legend {
+    font-weight: 700;
+    color: #173452;
+    padding: 0 6px;
+}
+
+#hostelAuthorityCheckboxes label,
+#programChairCheckboxes label {
+    display: block;
+    margin: 6px 0;
+    font-weight: 600;
+}
+
+.form-summary {
+    margin-bottom: 14px;
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(179, 27, 52, 0.26);
+    background: rgba(179, 27, 52, 0.1);
+    color: #6f1325;
+}
+
+.form-summary ul {
+    margin: 8px 0 0 18px;
+}
+
+.form-summary.is-success {
+    border-color: rgba(31, 143, 86, 0.3);
+    background: rgba(31, 143, 86, 0.1);
+    color: #185b39;
+}
+
+.field-error {
+    display: none;
+    margin-top: 6px;
+    color: #851527;
+    font-weight: 700;
+    font-size: 0.92rem;
+}
+
+select.is-invalid,
+input.is-invalid,
+textarea.is-invalid {
+    border-color: #9b122c;
+    box-shadow: 0 0 0 3px rgba(179, 27, 52, 0.18);
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid #0e5a66;
+    outline-offset: 2px;
+}
+
+button.is-loading {
+    opacity: 0.82;
+}
+
+button.is-success {
+    background: linear-gradient(180deg, #1f8f56, #196f43);
+}

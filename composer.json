@@ -1,0 +1,13 @@
+{
+  "name": "nmims/apnm6-complaint-portal",
+  "description": "Anonymous complaint portal",
+  "type": "project",
+  "require": {
+    "php": ">=8.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "app/"
+    }
+  }
+}

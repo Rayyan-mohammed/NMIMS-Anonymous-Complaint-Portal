@@ -1,0 +1,9 @@
+RewriteEngine On
+
+# Keep existing files and directories directly accessible.
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Lightweight front router for clean URLs.
+RewriteRule ^ router.php [QSA,L]

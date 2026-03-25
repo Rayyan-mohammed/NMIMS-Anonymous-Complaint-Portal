@@ -1,0 +1,41 @@
+@import url('../assets/css/theme.css');
+
+.registration-container {
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    min-height: calc(100vh - 120px);
+}
+
+.registration-form {
+    width: 100%;
+    max-width: 700px;
+}
+
+.registration-form h1 {
+    text-align: center;
+    color: #8f162a;
+    margin-bottom: 8px;
+}
+
+.registration-form p {
+    text-align: center;
+    color: #59667a;
+    margin-bottom: 16px;
+}
+
+.form-row {
+    display: flex;
+    gap: 14px;
+}
+
+.form-group {
+    flex: 1;
+}
+
+@media (max-width: 768px) {
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+}

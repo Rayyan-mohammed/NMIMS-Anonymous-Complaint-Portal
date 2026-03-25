@@ -1,0 +1,51 @@
+@import url('../assets/css/theme.css');
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-container {
+    min-height: calc(100vh - 120px);
+    display: grid;
+    place-items: center;
+    padding: 24px;
+}
+
+.login-box,
+.login-form {
+    max-width: 470px;
+    width: 100%;
+}
+
+.login-box h2,
+.login-form h1 {
+    text-align: center;
+    color: #8f162a;
+    margin-bottom: 10px;
+}
+
+.login-box .back-link,
+.login-form .back-link {
+    display: block;
+    text-align: center;
+    margin-top: 8px;
+    color: #0e5a66;
+    border: none;
+    padding: 0;
+}
+
+.brand-logo {
+    text-align: center;
+    margin-bottom: 14px;
+}
+
+.brand-logo img {
+    max-width: 220px;
+    height: auto;
+    filter: drop-shadow(0 8px 15px rgba(20, 33, 48, 0.18));
+}
+
+.logout-btn {
+    background: linear-gradient(180deg, #b31b34, #8f162a);
+}

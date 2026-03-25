@@ -1,0 +1,72 @@
+@import url('../theme.css');
+
+.container {
+    max-width: 860px;
+}
+
+.status-result {
+    margin-top: 18px;
+    padding: 18px;
+    border: 1px solid rgba(14, 90, 102, 0.2);
+    border-radius: 14px;
+    background: rgba(14, 90, 102, 0.06);
+}
+
+.status-result h3 {
+    color: #8f162a;
+    margin-bottom: 10px;
+}
+
+.detail-row {
+    margin-bottom: 8px;
+}
+
+.detail-label {
+    font-weight: 700;
+    color: #173452;
+    margin-right: 8px;
+}
+
+.updates-section {
+    margin-top: 18px;
+}
+
+.update-card {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(31, 41, 51, 0.08);
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 10px;
+}
+
+.update-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 6px;
+    color: #5f6d80;
+    font-size: 0.95rem;
+}
+
+.check-status {
+    text-align: center;
+}
+
+.check-status .back-link {
+    display: inline-block;
+    padding: 10px 14px;
+    border-radius: 999px;
+    color: #fff;
+    text-decoration: none;
+    background: linear-gradient(180deg, #0e6d82, #0b5768);
+}
+
+.university-logo {
+    text-align: center;
+    margin-bottom: 14px;
+}
+
+.university-logo img {
+    max-width: 220px;
+    filter: drop-shadow(0 8px 15px rgba(20, 33, 48, 0.18));
+}
