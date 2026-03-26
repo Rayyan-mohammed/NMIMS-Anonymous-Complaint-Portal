@@ -12,36 +12,51 @@ A web-based platform for students and stakeholders of NMIMS to submit complaints
 - **Statistics Dashboard:** Aggregated stats for complaints by status and school.
 - **Modern UI:** Responsive and visually appealing interface.
 
+# NMIMS Anonymous Complaint Portal
+
+A secure, web-based platform for students and stakeholders of NMIMS to submit complaints anonymously, track their status, and ensure their concerns are addressed by the appropriate authorities. The portal supports multiple schools and escalation levels, providing a transparent and efficient complaint management system.
+
+## Features
+
+- **Anonymous Complaint Submission:** Users can submit complaints without revealing their identity.
+- **Multi-School Support:** Handles complaints for STME, SBM, SOL, SPTM, and more.
+- **Escalation Levels:** Complaints can be directed to Program Chair, Deputy Registrar, Hostel Rector, or Campus Director.
+- **Status Tracking:** Users receive a reference number to check the status of their complaint.
+- **Admin Panel:** For authorized personnel to view, update, and resolve complaints.
+- **Statistics Dashboard:** Aggregated stats for complaints by status and school.
+- **Automated Backups:** PowerShell script for database and log backup/restore.
+- **Modern UI:** Responsive and visually appealing interface.
 
 ## Getting Started
 
 ### Prerequisites
 
-- PHP 7.4 or higher
+- PHP 7.4 or higher (PHP 8.1+ recommended)
 - MySQL/MariaDB
 - Web server (e.g., Apache, XAMPP)
+- Composer (for dependency management, if needed)
 
 ### Installation
 
 1. **Clone the repository:**
    ```bash
    git clone https://github.com/Rayyan-mohammed/NMIMS-Anonymous-Complaint-Portal.git
-   cd nmims-anonymous-complaint-portal
+   cd NMIMS-Anonymous-Complaint-Portal
    ```
 
 2. **Database Setup:**
-   - Create a single database named `apnm6_db`.
+   - Create a database named `apnm6_db`.
    - Import the unified SQL file:
      - `database/apnm6_unified.sql`
-   - Use phpMyAdmin or MySQL CLI:
+   - Example using MySQL CLI:
      ```bash
      mysql -u root -p -e "CREATE DATABASE IF NOT EXISTS apnm6_db"
      mysql -u root -p apnm6_db < database/apnm6_unified.sql
      ```
 
 3. **Configure Database Credentials:**
-   - Copy `.env.example` to `.env` and update DB values if needed.
-   - Defaults:
+   - Edit `app/Config/database.php` or use an `.env` file if supported.
+   - Default values:
      - `DB_HOST=127.0.0.1`
      - `DB_PORT=3306`
      - `DB_NAME=apnm6_db`
@@ -50,7 +65,7 @@ A web-based platform for students and stakeholders of NMIMS to submit complaints
 
 4. **Deploy the Application:**
    - Place the project files in your web server's root directory (e.g., `htdocs` for XAMPP).
-   - Access the portal via `http://localhost/nmims-anonymous-complaint-portal/index.php`.
+   - Access the portal via `http://localhost/NMIMS-Anonymous-Complaint-Portal/public/index.php`.
 
 ## Usage
 
@@ -59,14 +74,16 @@ A web-based platform for students and stakeholders of NMIMS to submit complaints
 - **Admin Panel:** Authorized users can log in to view and update complaint statuses.
 
 ### Quick Admin Seed Accounts
+
 - `director@nmims.edu` / `password`
 - `deputy.registrar@nmims.edu` / `password`
 - `stme.chair@nmims.edu` / `password`
 - `hostel.warden@nmims.edu` / `password`
 
-On first login with the initial password `password`, admins are forced to set a new password before accessing the dashboard.
+> On first login with the initial password `password`, admins are forced to set a new password before accessing the dashboard.
 
 ### Automated Smoke Check
+
 Run end-to-end baseline checks:
 
 ```bash
@@ -76,7 +93,7 @@ php tests/smoke_runner.php
 Optional overrides:
 
 ```bash
-set APNM6_SMOKE_BASE_URL=http://localhost/APNM6/public
+set APNM6_SMOKE_BASE_URL=http://localhost/NMIMS-Anonymous-Complaint-Portal/public
 set APNM6_SMOKE_ADMIN_EMAIL=director@nmims.edu
 set APNM6_SMOKE_ADMIN_PASSWORD=password
 php tests/smoke_runner.php
@@ -113,18 +130,21 @@ Admin monitoring page:
 
 ## File Structure
 
-- `index.php` — Main landing page and complaint submission form.
-- `submit_complaint.php` — Handles complaint form submissions.
-- `check_status.php` — Allows users to check complaint status.
-- `admin.php` — Admin login and dashboard.
-- `update_status.php` — API endpoint for updating complaint statuses.
-- `get_complaint_stats.php` — Provides statistics for dashboards.
-- `*.css` — Stylesheets for various pages.
-- `*.sql` — Database schema for each school/authority.
+- `public/index.php` — Main landing page and complaint submission form.
+- `public/submit_complaint.php` — Handles complaint form submissions.
+- `public/check-status/check-status.php` — Allows users to check complaint status.
+- `public/admin/login.php` — Admin login.
+- `public/admin/dashboard.php` — Admin dashboard.
+- `public/admin/update_status.php` — API endpoint for updating complaint statuses.
+- `public/admin/analytics.php` — Provides statistics for dashboards.
+- `public/assets/css/` — Stylesheets for various pages.
+- `database/apnm6_unified.sql` — Database schema.
+- `scripts/db_backup_restore.ps1` — Backup and restore automation.
+- `tests/smoke_runner.php` — Automated smoke tests.
 
 ## Database Structure
 
-Each school/authority has its own database and tables, e.g.:
+All complaints are stored in a unified database with tables for each authority. Example:
 
 ```sql
 CREATE TABLE program_chair_complaints (
@@ -140,11 +160,13 @@ CREATE TABLE program_chair_complaints (
 - All complaints are stored without user-identifying information.
 - Reference numbers are generated for tracking.
 - Only authorized personnel can access the admin panel.
+- CSRF protection and input validation are implemented.
 
 ## Customization
 
 - Update the logo and branding in the HTML files as needed.
 - Modify escalation levels or add new schools by updating the form and database.
+- Extend admin roles or complaint categories in the database and UI.
 
 ## License
 
@@ -152,5 +174,4 @@ This project is for educational purposes. Please check with NMIMS administration
 
 ---
 
-**Contributions and suggestions are welcome!** 
-0
+**Contributions and suggestions are welcome!**
