@@ -18,9 +18,9 @@ header h1 {
     align-items: center;
     gap: 10px;
     padding: 10px 12px;
-    border: 1px dashed rgba(14, 90, 102, 0.34);
+    border: 1px dashed rgba(179, 27, 52, 0.34);
     border-radius: 12px;
-    background: rgba(14, 90, 102, 0.06);
+    background: rgba(179, 27, 52, 0.06);
 }
 
 .form-group.anonymous-checkbox label {
@@ -29,7 +29,7 @@ header h1 {
 }
 
 input[type="checkbox"] {
-    accent-color: #0e5a66;
+    accent-color: #BA0C2F;
     width: 18px;
     height: 18px;
 }
@@ -39,18 +39,18 @@ input[type="checkbox"] {
     text-align: center;
     padding: 20px;
     display: none;
-    border: 1px solid rgba(31, 143, 86, 0.25);
+    border: 1px solid rgba(179, 27, 52, 0.25);
     border-radius: 14px;
-    background: rgba(31, 143, 86, 0.08);
+    background: rgba(179, 27, 52, 0.08);
 }
 
 #confirmationMessage h2 {
-    color: #1f8f56;
+    color: #BA0C2F;
     margin-bottom: 8px;
 }
 
 #referenceNumber {
-    color: #7a1024;
+    color: #BA0C2F;
     font-family: var(--font-heading);
     font-size: 1.1rem;
 }
@@ -62,7 +62,7 @@ input[type="checkbox"] {
     border-radius: 999px;
     text-decoration: none;
     color: #fff;
-    background: linear-gradient(180deg, #0e6d82, #0b5768);
+    background: linear-gradient(180deg, #BA0C2F, #BA0C2F);
 }
 
 #newComplaintBtn {

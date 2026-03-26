@@ -18,6 +18,10 @@ class LoginController
     public function handle(string $requestMethod, array $postData, array &$session): array
     {
         if (isset($session['user_id'])) {
+            if (!empty($session['force_password_change'])) {
+                return ['redirect' => 'change_password.php', 'error' => ''];
+            }
+
             return ['redirect' => 'dashboard.php', 'error' => ''];
         }
 
@@ -62,6 +66,11 @@ class LoginController
         $session['email'] = $user['email'];
         $session['role'] = $user['role'];
         $session['school_id'] = $user['school_id'];
+        $session['force_password_change'] = $this->authService->isUsingInitialPassword($user);
+
+        if (!empty($session['force_password_change'])) {
+            return ['redirect' => 'change_password.php', 'error' => ''];
+        }
 
         return ['redirect' => 'dashboard.php', 'error' => ''];
     }

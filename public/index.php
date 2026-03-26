@@ -17,26 +17,28 @@ if (isset($_SESSION['user_id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NMIMS University Anonymous Complaint Portal</title>
-    <link rel="stylesheet" href="assets/css/theme.css?v=20260325b">
-    <link rel="stylesheet" href="assets/css/app.css?v=20260325b">
+    <link rel="stylesheet" href="assets/css/theme.css?v=20260326b">
+    <link rel="stylesheet" href="assets/css/app.css?v=20260326b">
 </head>
-<body>
-    <!-- Navigation Bar -->
-    <div class="navbar">
-        <div class="navbar-logo">
-            <img src="assets/nmims_logo.jpg" alt="NMIMS Logo">
-        </div>
-        <div class="nav-links">
-            <div class="check-status">
-                <a href="check-status/check-status.php">Check Status</a>
+<body class="public-page">
+    <header class="site-header">
+        <nav class="navbar">
+            <div class="navbar-logo">
+                <img src="assets/nmims_logo.jpg" alt="NMIMS Logo">
             </div>
-            <div class="admin-login">
-                <a href="admin/login.php">Admin Login</a>
+            <div class="nav-links">
+                <div class="check-status">
+                    <a href="check-status/check-status.php">Check Status</a>
+                </div>
+                <div class="admin-login">
+                    <a href="admin/login.php">Admin Login</a>
+                </div>
             </div>
-        </div>
-    </div>
-    
-    <div class="container">
+        </nav>
+    </header>
+
+    <main class="site-main">
+        <div class="container">
         <!-- University Logo in Center -->
         <div class="university-logo">
             <img src="assets/nmims_logo.jpg" alt="NMIMS University">
@@ -81,7 +83,7 @@ if (isset($_SESSION['user_id'])) {
             </div>
             
             <!-- Academic Subtype -->
-            <div class="form-group" id="academicSubTypeContainer" style="display:none;">
+            <div class="form-group" id="academicSubTypeContainer">
                 <label for="academicSubType">Academic Issue Type:</label>
                 <select id="academicSubType" name="academicSubType">
                     <option value="" selected disabled>Select specific issue</option>
@@ -96,7 +98,7 @@ if (isset($_SESSION['user_id'])) {
             </div>
             
             <!-- Hostel Subtype -->
-            <div class="form-group" id="hostelSubTypeContainer" style="display:none;">
+            <div class="form-group" id="hostelSubTypeContainer">
                 <label for="hostelSubType">Hostel Issue Type:</label>
                 <select id="hostelSubType" name="hostelSubType">
                     <option value="" selected disabled>Select specific issue</option>
@@ -111,7 +113,7 @@ if (isset($_SESSION['user_id'])) {
             </div>
 
             <!-- Hostel Authority (Checkbox) -->
-            <div class="form-group" id="hostelContainer" style="display:none;">
+            <div class="form-group" id="hostelContainer">
                 <fieldset>
                     <legend>Select Hostel Authority:</legend>
                     <div id="hostelAuthorityCheckboxes" role="group" aria-label="Hostel authority list">
@@ -126,6 +128,7 @@ if (isset($_SESSION['user_id'])) {
                     ?>
                     </div>
                 </fieldset>
+            </div>
             
             <!-- Escalation -->
             <div class="form-group" id="escalationContainer">
@@ -139,16 +142,16 @@ if (isset($_SESSION['user_id'])) {
             </div>
             
             <!-- Program Chair (Checkbox) -->
-            <div class="form-group" id="programChairContainer" style="display:none;">
+            <div class="form-group" id="programChairContainer">
                 <fieldset>
-                    <legend>Select Program Chair:</legend>
+                    <legend>Select Program Chair (Optional Additional Recipient):</legend>
                     <div id="programChairCheckboxes" role="group" aria-label="Program chair list">
                     <?php
                     $sql = "SELECT user_id, name, school_id FROM users WHERE role = 'program_chair' AND is_active = 1 ORDER BY name";
                     $result = $conn->query($sql);
                     if ($result && $result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
-                            echo "<label class='program-chair-option' data-school-id='" . (int) $row['school_id'] . "' style='display:none;'>";
+                            echo "<label class='program-chair-option' data-school-id='" . (int) $row['school_id'] . "'>";
                             echo "<input type='checkbox' name='programChair[]' value='" . (int) $row['user_id'] . "'> " . htmlspecialchars($row['name']);
                             echo "</label>";
                         }
@@ -156,6 +159,7 @@ if (isset($_SESSION['user_id'])) {
                     ?>
                     </div>
                 </fieldset>
+            </div>
 
             <!-- Complaint Details -->
             <div class="form-group">
@@ -168,22 +172,22 @@ if (isset($_SESSION['user_id'])) {
                 <input type="checkbox" id="anonymousCheck" name="anonymousCheck" checked="checked">
                 <label for="anonymousCheck">Keep my identity anonymous</label>
             </div>
-            <small id="identityRuleHint" style="display:block;margin-top:-6px;margin-bottom:12px;color:#35536b;">
+            <small id="identityRuleHint" class="identity-hint">
                 If unchecked, Name, SAP ID, and Year are mandatory to submit.
             </small>
 
-            <div class="form-group" id="studentIdentityContainer" style="display:none;">
+            <div class="form-group" id="studentIdentityContainer">
                 <label for="studentName">Name:</label>
                 <input type="text" id="studentName" name="studentName" maxlength="120" placeholder="Enter your name">
 
-                <label for="sapId" style="margin-top:10px;display:block;">SAP ID (Student ID):</label>
+                <label for="sapId" class="inline-label-spaced">SAP ID (Student ID):</label>
                 <input type="text" id="sapId" name="sapId" maxlength="30" placeholder="Enter your student SAP ID">
 
-                <label for="studyYear" style="margin-top:10px;display:block;">Year:</label>
+                <label for="studyYear" class="inline-label-spaced">Year:</label>
                 <select id="studyYear" name="studyYear">
                     <option value="" selected>Select year</option>
                 </select>
-                <small id="yearHint" style="display:block;margin-top:6px;color:#666;"></small>
+                <small id="yearHint" class="muted-helper"></small>
             </div>
             
             <!-- Submit Button -->
@@ -193,7 +197,7 @@ if (isset($_SESSION['user_id'])) {
         </form>
         
         <!-- Confirmation Message -->
-        <div id="confirmationMessage" style="display:none;">
+        <div id="confirmationMessage">
             <h2>Thank You</h2>
             <p>Your complaint has been submitted anonymously.<br/> Your reference number is: <span id="referenceNumber"></span></p>
             <button type="button" id="copyReferenceBtn">Copy Reference Number</button>
@@ -204,11 +208,23 @@ if (isset($_SESSION['user_id'])) {
             </div>
             <button id="newComplaintBtn">Submit Another Complaint</button>
         </div>
-    </div>
-    
-    <footer>
+        </div>
+    </main>
+
+    <footer class="site-footer">
         <div class="footer-container">
-            <span>2025 &copy;  STME All rights reserved.</span>
+            <div class="footer-brand">
+                <strong>NMIMS Anonymous Complaint Portal</strong>
+                <span>Secure reporting for students across schools and authorities.</span>
+            </div>
+            <div class="footer-links">
+                <a href="check-status/check-status.php">Check Status</a>
+                <a href="admin/login.php">Admin Login</a>
+                <a href="about-portal.php">About Portal</a>
+            </div>
+            <div class="footer-copy">
+                <span>2026 &copy; STME. All rights reserved.</span>
+            </div>
         </div>
     </footer>
     

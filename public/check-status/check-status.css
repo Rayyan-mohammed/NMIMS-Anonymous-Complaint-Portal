@@ -7,13 +7,13 @@
 .status-result {
     margin-top: 18px;
     padding: 18px;
-    border: 1px solid rgba(14, 90, 102, 0.2);
+    border: 1px solid rgba(179, 27, 52, 0.2);
     border-radius: 14px;
-    background: rgba(14, 90, 102, 0.06);
+    background: rgba(179, 27, 52, 0.06);
 }
 
 .status-result h3 {
-    color: #8f162a;
+    color: #BA0C2F;
     margin-bottom: 10px;
 }
 
@@ -23,7 +23,7 @@
 
 .detail-label {
     font-weight: 700;
-    color: #173452;
+    color: #2C2A29;
     margin-right: 8px;
 }
 
@@ -44,7 +44,7 @@
     justify-content: space-between;
     gap: 8px;
     margin-bottom: 6px;
-    color: #5f6d80;
+    color: #63666A;
     font-size: 0.95rem;
 }
 
@@ -58,7 +58,7 @@
     border-radius: 999px;
     color: #fff;
     text-decoration: none;
-    background: linear-gradient(180deg, #0e6d82, #0b5768);
+    background: linear-gradient(180deg, #BA0C2F, #BA0C2F);
 }
 
 .university-logo {

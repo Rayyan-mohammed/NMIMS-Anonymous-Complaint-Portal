@@ -23,6 +23,10 @@ class AuthGuard
             return $loginRedirect;
         }
 
+        if (!empty($session['force_password_change'])) {
+            return 'change_password.php';
+        }
+
         $role = (string) ($session['role'] ?? '');
         if (!in_array($role, $allowedRoles, true)) {
             return $redirectTo;

@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const programChairCheckboxes = document.getElementById('programChairCheckboxes');
     const formSummary = document.getElementById('formSummary');
     const complaintDetails = document.getElementById('complaintDetails');
+    let hasAttemptedSubmit = false;
 
     const submitButtonDefaultText = submitBtn ? submitBtn.textContent : 'Submit Complaint';
     const copyButtonDefaultText = copyReferenceBtn ? copyReferenceBtn.textContent : 'Copy Reference Number';
@@ -146,11 +147,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         setFieldError('escalation', '');
-
-        if (escalationSelect.value === 'programChair' && !document.querySelector('input[name="programChair[]"]:checked')) {
-            setFieldError('escalation', 'Please select at least one program chair for the selected school.');
-            return 'At least one program chair must be selected.';
-        }
 
         return null;
     }
@@ -325,22 +321,34 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     escalationSelect.addEventListener('change', function () {
-        if (this.value === 'programChair') {
+        const isAdditionalProgramChairMode = this.value === 'deputyRegistrar' || this.value === 'campusDirector';
+
+        if (isAdditionalProgramChairMode) {
             programChairContainer.style.display = 'block';
             updateProgramChairOptions(schoolSelect.value);
         } else {
+            const selectedProgramChair = programChairCheckboxes.querySelectorAll('input[name="programChair[]"]');
+            selectedProgramChair.forEach((checkbox) => {
+                checkbox.checked = false;
+            });
             programChairContainer.style.display = 'none';
+        }
+
+        if (hasAttemptedSubmit) {
+            validateEscalation();
         }
     });
 
     schoolSelect.addEventListener('change', function () {
         updateYearOptions();
-        if (escalationSelect.value === 'programChair') {
+        if (escalationSelect.value === 'deputyRegistrar' || escalationSelect.value === 'campusDirector') {
             updateProgramChairOptions(this.value);
         }
 
-        validateSchool();
-        validateYearRange();
+        if (hasAttemptedSubmit) {
+            validateSchool();
+            validateYearRange();
+        }
     });
 
     anonymousCheck.addEventListener('change', function () {
@@ -360,27 +368,53 @@ document.addEventListener('DOMContentLoaded', function () {
             studyYear.setAttribute('required', 'required');
         }
 
-        updateSubmitAvailability();
-        validateIdentityFields();
+        if (hasAttemptedSubmit) {
+            validateIdentityFields();
+        }
     });
-
-    studentName.addEventListener('input', updateSubmitAvailability);
-    sapId.addEventListener('input', updateSubmitAvailability);
-    studyYear.addEventListener('change', updateSubmitAvailability);
 
     complaintType.addEventListener('change', function () {
-        validateComplaintType();
-        validateComplaintSubType();
+        if (hasAttemptedSubmit) {
+            validateComplaintType();
+            validateComplaintSubType();
+        }
     });
-    academicSubType.addEventListener('change', validateComplaintSubType);
-    hostelSubType.addEventListener('change', validateComplaintSubType);
-    escalationSelect.addEventListener('change', validateEscalation);
-    complaintDetails.addEventListener('input', validateComplaintDetails);
-    studentName.addEventListener('input', validateIdentityFields);
-    sapId.addEventListener('input', validateIdentityFields);
+
+    academicSubType.addEventListener('change', function () {
+        if (hasAttemptedSubmit) {
+            validateComplaintSubType();
+        }
+    });
+
+    hostelSubType.addEventListener('change', function () {
+        if (hasAttemptedSubmit) {
+            validateComplaintSubType();
+        }
+    });
+
+    complaintDetails.addEventListener('input', function () {
+        if (hasAttemptedSubmit) {
+            validateComplaintDetails();
+        }
+    });
+
+    studentName.addEventListener('input', function () {
+        if (hasAttemptedSubmit) {
+            validateIdentityFields();
+        }
+    });
+
+    sapId.addEventListener('input', function () {
+        if (hasAttemptedSubmit) {
+            validateIdentityFields();
+        }
+    });
+
     studyYear.addEventListener('change', function () {
-        validateIdentityFields();
-        validateYearRange();
+        if (hasAttemptedSubmit) {
+            validateIdentityFields();
+            validateYearRange();
+        }
     });
 
     function updateYearOptions() {
@@ -402,21 +436,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         yearHint.textContent = 'This school allows Year 1 to Year ' + maxYear + '.';
-        updateSubmitAvailability();
-    }
-
-    function updateSubmitAvailability() {
-        if (!submitBtn) {
-            return;
-        }
-
-        const identityReady = anonymousCheck.checked
-            || (studentName.value.trim() !== '' && sapId.value.trim() !== '' && studyYear.value !== '');
-
-        submitBtn.disabled = !identityReady;
-        submitBtn.title = identityReady
-            ? ''
-            : 'Fill Name, SAP ID, and Year or select anonymous to continue.';
     }
 
     function updateProgramChairOptions(school) {
@@ -438,6 +457,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     complaintForm.addEventListener('submit', async function (e) {
         e.preventDefault();
+        hasAttemptedSubmit = true;
 
         if (!validateForm(true)) {
             return;
@@ -487,6 +507,7 @@ document.addEventListener('DOMContentLoaded', function () {
     newComplaintBtn.addEventListener('click', function () {
         confirmationMessage.style.display = 'none';
         complaintForm.style.display = 'block';
+        hasAttemptedSubmit = false;
         setSubmitButtonState('default');
         showSummary([]);
         if (copyStatus) {
@@ -535,6 +556,4 @@ document.addEventListener('DOMContentLoaded', function () {
 
     updateYearOptions();
     anonymousCheck.dispatchEvent(new Event('change'));
-    updateSubmitAvailability();
-    validateForm(false);
 });

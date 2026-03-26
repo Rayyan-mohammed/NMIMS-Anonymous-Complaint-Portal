@@ -27,167 +27,18 @@ $statusHistory = $pageData['status_history'] ?? [];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Complaint - NMIMS Complaint Portal</title>
-    <link rel="stylesheet" href="../assets/css/admin/login.css?v=20260325b">
-    <style>
-        .complaint-container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            border: 1px solid rgba(14, 90, 102, 0.22);
-            background: linear-gradient(180deg, rgba(255,255,255,0.94), rgba(247,250,253,0.9));
-        }
-        .complaint-details {
-            background: rgba(14, 90, 102, 0.06);
-            border: 1px solid rgba(14, 90, 102, 0.15);
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-        }
-        .detail-row {
-            margin-bottom: 10px;
-        }
-        .detail-label {
-            font-weight: bold;
-            margin-right: 10px;
-        }
-        .updates-section {
-            margin-top: 30px;
-        }
-        .update-card {
-            background: rgba(255,255,255,0.92);
-            border: 1px solid rgba(31, 41, 51, 0.1);
-            padding: 14px;
-            border-radius: 12px;
-            margin-bottom: 12px;
-        }
-        .update-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-            color: #5f6d80;
-        }
-        .back-btn {
-            display: inline-block;
-            padding: 8px 16px;
-            background: linear-gradient(180deg, #0e6d82, #0b5768);
-            color: white;
-            text-decoration: none;
-            border-radius: 999px;
-            margin-bottom: 20px;
-        }
-        .status-badge {
-            display: inline-block;
-            padding: 6px 12px;
-            border-radius: 999px;
-            color: white;
-            font-weight: 700;
-        }
-        .status-pending {
-            background: linear-gradient(180deg, #d99906, #b47803);
-        }
-        .status-in_progress {
-            background: linear-gradient(180deg, #1a8095, #0d6577);
-        }
-        .status-in-progress {
-            background: linear-gradient(180deg, #1a8095, #0d6577);
-        }
-        .status-resolved {
-            background: linear-gradient(180deg, #2f9b63, #1f7d4d);
-        }
-        .brand-logo {
-            margin-bottom: 10px;
-        }
-        .brand-logo img {
-            max-width: 220px;
-            width: 100%;
-            height: auto;
-            filter: drop-shadow(0 8px 18px rgba(24, 42, 62, 0.2));
-        }
-        .update-form {
-            margin-top: 12px;
-            padding: 14px;
-            border-radius: 12px;
-            background: rgba(179, 27, 52, 0.06);
-            border: 1px solid rgba(179, 27, 52, 0.16);
-        }
-        .quick-actions {
-            margin-top: 16px;
-            padding: 14px;
-            border-radius: 12px;
-            background: rgba(14, 90, 102, 0.06);
-            border: 1px solid rgba(14, 90, 102, 0.16);
-        }
-        .quick-actions-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 10px;
-        }
-        .quick-actions-row button {
-            border: none;
-            border-radius: 999px;
-            padding: 10px 14px;
-            color: #fff;
-            cursor: pointer;
-            font-weight: 700;
-        }
-        .action-progress {
-            background: linear-gradient(180deg, #0e6d82, #0b5768);
-        }
-        .action-resolve {
-            background: linear-gradient(180deg, #2f9b63, #1f7d4d);
-        }
-        .action-update {
-            background: linear-gradient(180deg, #b31b34, #8f162a);
-        }
-        .quick-actions textarea,
-        .update-form textarea {
-            width: 100%;
-            border-radius: 10px;
-            border: 1px solid rgba(31, 41, 51, 0.15);
-            padding: 10px;
-        }
-        .action-feedback {
-            min-height: 24px;
-            margin-top: 10px;
-            font-weight: 700;
-            color: #174e2d;
-        }
-        .history-section {
-            margin-top: 26px;
-        }
-        .history-card {
-            background: rgba(255,255,255,0.92);
-            border: 1px solid rgba(31, 41, 51, 0.1);
-            padding: 12px;
-            border-radius: 12px;
-            margin-bottom: 10px;
-        }
-        .history-meta {
-            display: flex;
-            justify-content: space-between;
-            gap: 10px;
-            color: #5f6d80;
-            margin-top: 6px;
-            flex-wrap: wrap;
-        }
-        button:focus-visible,
-        a:focus-visible,
-        textarea:focus-visible {
-            outline: 3px solid #0e5a66;
-            outline-offset: 2px;
-        }
-    </style>
+    <link rel="stylesheet" href="../assets/css/admin/login.css?v=20260326b">
 </head>
-<body>
-    <div class="complaint-container">
+<body class="admin-complaint-page">
+    <div class="complaint-container vc-page">
         <div class="brand-logo">
             <img src="../assets/nmims_logo.jpg" alt="NMIMS University Logo">
         </div>
-        <a href="dashboard.php" class="back-btn">← Back to Dashboard</a>
+        <a href="dashboard.php" class="back-btn vc-back-btn">← Back to Dashboard</a>
         
         <div class="complaint-details">
             <h2>Complaint Details</h2>
+            <p class="vc-subtitle">Reference <?php echo htmlspecialchars($complaint['reference_number']); ?> submitted by <?php echo htmlspecialchars($complaint['school_name']); ?>.</p>
             
             <div class="detail-row">
                 <span class="detail-label">Reference Number:</span>
@@ -238,18 +89,20 @@ $statusHistory = $pageData['status_history'] ?? [];
                 </div>
             <?php endif; ?>
             
-            <div class="detail-row">
+            <div class="detail-row detail-row-block">
                 <span class="detail-label">Complaint Details:</span>
-                <p><?php echo nl2br(htmlspecialchars($complaint['complaint_details'])); ?></p>
+                <p class="vc-complaint-text"><?php echo nl2br(htmlspecialchars($complaint['complaint_details'])); ?></p>
             </div>
         </div>
 
-        <div class="updates-section">
+        <div class="vc-columns">
+
+        <div class="updates-section vc-card-section">
             <h3>Updates</h3>
             
             <div id="updatesList">
                 <?php if (empty($updates)): ?>
-                    <p id="noUpdatesText">No updates available for this complaint.</p>
+                    <p id="noUpdatesText" class="empty-state">No updates available for this complaint.</p>
                 <?php else: ?>
                     <?php foreach ($updates as $update): ?>
                         <div class="update-card">
@@ -287,11 +140,11 @@ $statusHistory = $pageData['status_history'] ?? [];
             </div>
         </div>
 
-        <div class="history-section">
+        <div class="history-section vc-card-section">
             <h3>Status History</h3>
             <div id="statusHistoryList">
                 <?php if (empty($statusHistory)): ?>
-                    <p id="noStatusHistoryText">No status changes recorded yet.</p>
+                    <p id="noStatusHistoryText" class="empty-state">No status changes recorded yet.</p>
                 <?php else: ?>
                     <?php foreach ($statusHistory as $history): ?>
                         <div class="history-card">
@@ -304,6 +157,7 @@ $statusHistory = $pageData['status_history'] ?? [];
                     <?php endforeach; ?>
                 <?php endif; ?>
             </div>
+        </div>
         </div>
     </div>
 

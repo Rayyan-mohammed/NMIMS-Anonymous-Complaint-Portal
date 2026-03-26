@@ -49,6 +49,8 @@ $filters = $dashboardData['filters'];
 $schools = $dashboardData['schools'];
 $complaints = $dashboardData['complaints'];
 $pagination = $dashboardData['pagination'];
+$flashSuccess = (string) ($_SESSION['flash_success'] ?? '');
+unset($_SESSION['flash_success']);
 
 function dashboardQuery(array $filters, array $overrides = []): string
 {
@@ -75,205 +77,42 @@ function dashboardQuery(array $filters, array $overrides = []): string
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - NMIMS Complaint Portal</title>
-    <link rel="stylesheet" href="../assets/css/admin/login.css?v=20260325b">
-    <style>
-        .dashboard-container {
-            max-width: 1240px;
-            margin: 20px auto 34px;
-            padding: 24px;
-            border: 1px solid rgba(14, 90, 102, 0.22);
-            background: linear-gradient(180deg, rgba(255,255,255,0.94), rgba(247,250,253,0.9));
-        }
-        .welcome-message {
-            margin-bottom: 18px;
-            border-bottom: 1px solid rgba(31, 41, 51, 0.1);
-            padding-bottom: 10px;
-        }
-        .complaints-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 12px;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 10px 22px rgba(22, 36, 54, 0.08);
-        }
-        .complaints-table th, .complaints-table td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid rgba(31, 41, 51, 0.1);
-        }
-        .complaints-table th {
-            background: rgba(14, 90, 102, 0.12);
-            color: #0f3c4f;
-        }
-        .status-pending {
-            color: #b47803;
-            font-weight: 700;
-        }
-        .status-in_progress {
-            color: #0d6577;
-            font-weight: 700;
-        }
-        .status-in-progress {
-            color: #0d6577;
-            font-weight: 700;
-        }
-        .status-resolved {
-            color: #1f7d4d;
-            font-weight: 700;
-        }
-        .action-buttons {
-            display: flex;
-            gap: 10px;
-        }
-        .action-buttons button {
-            padding: 8px 12px;
-            border: none;
-            border-radius: 999px;
-            cursor: pointer;
-            font-weight: 700;
-        }
-        .view-btn {
-            background: linear-gradient(180deg, #0e6d82, #0b5768);
-            color: white;
-        }
-        .update-btn {
-            background: linear-gradient(180deg, #2f9b63, #1f7d4d);
-            color: white;
-        }
-        .logout-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            padding: 9px 16px;
-            background: linear-gradient(180deg, #b31b34, #8f162a);
-            color: white;
-            border: none;
-            border-radius: 999px;
-            cursor: pointer;
-            font-weight: 700;
-        }
-        .no-complaints {
-            text-align: center;
-            padding: 20px;
-            color: #666;
-        }
-        .brand-logo {
-            margin-bottom: 10px;
-        }
-        .brand-logo img {
-            max-width: 220px;
-            width: 100%;
-            height: auto;
-            filter: drop-shadow(0 8px 18px rgba(24, 42, 62, 0.2));
-        }
-        .filters {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin: 15px 0;
-            align-items: end;
-            background: rgba(14, 90, 102, 0.06);
-            border: 1px solid rgba(14, 90, 102, 0.15);
-            border-radius: 12px;
-            padding: 12px;
-        }
-        .filters input, .filters select {
-            padding: 8px;
-            border: 1px solid rgba(31, 41, 51, 0.15);
-            border-radius: 10px;
-        }
-        .filters button {
-            padding: 8px 12px;
-            border: none;
-            border-radius: 999px;
-            cursor: pointer;
-            background: linear-gradient(180deg, #b31b34, #8f162a);
-            color: #fff;
-        }
-        .filters a {
-            color: #0e5a66;
-            text-decoration: none;
-            font-weight: 700;
-        }
-        .toolbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: end;
-            gap: 12px;
-            margin-top: 12px;
-            flex-wrap: wrap;
-        }
-        .toolbar .per-page select {
-            padding: 8px;
-            border: 1px solid rgba(31, 41, 51, 0.15);
-            border-radius: 10px;
-        }
-        .export-btn {
-            display: inline-block;
-            padding: 8px 12px;
-            border-radius: 999px;
-            color: #fff;
-            background: linear-gradient(180deg, #2f9b63, #1f7d4d);
-            text-decoration: none;
-            font-weight: 700;
-        }
-        .toolbar-actions {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-        .backup-btn {
-            display: inline-block;
-            padding: 8px 12px;
-            border-radius: 999px;
-            color: #fff;
-            background: linear-gradient(180deg, #0e6d82, #0b5768);
-            text-decoration: none;
-            font-weight: 700;
-        }
-        .pagination {
-            margin-top: 16px;
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-        .pagination a, .pagination span {
-            padding: 6px 10px;
-            border: 1px solid rgba(31, 41, 51, 0.15);
-            border-radius: 10px;
-            text-decoration: none;
-            color: #333;
-        }
-        .pagination .active {
-            background: linear-gradient(180deg, #0e6d82, #0b5768);
-            color: #fff;
-            border-color: #0b5768;
-        }
-        .summary {
-            margin-top: 8px;
-            color: #555;
-        }
-    </style>
+    <link rel="stylesheet" href="../assets/css/admin/login.css?v=20260326f">
 </head>
-<body>
+<body class="admin-dashboard-page">
     <div class="dashboard-container">
-        <button class="logout-btn" onclick="window.location.href='logout.php'">Logout</button>
-        <div class="brand-logo">
-            <img src="../assets/nmims_logo.jpg" alt="NMIMS University Logo">
-        </div>
-        
+        <header class="dashboard-topbar">
+            <div class="dashboard-topbar-left">
+                <div class="brand-logo dashboard-brand-logo">
+                    <img src="../assets/nmims_logo.jpg" alt="NMIMS University Logo">
+                </div>
+                <div class="dashboard-headline">
+                    <h1>Complaint Dashboard</h1>
+                    <p>
+                        Welcome, <?php echo htmlspecialchars($_SESSION['name']); ?>
+                        • <?php echo ucwords(str_replace('_', ' ', $role)); ?>
+                        <?php if ($school_name): ?>
+                            • <?php echo htmlspecialchars($school_name); ?>
+                        <?php endif; ?>
+                    </p>
+                </div>
+            </div>
+            <div class="header-actions dashboard-topbar-actions">
+                <a class="analytics-btn" href="analytics.php">Analytics</a>
+                <a class="profile-btn" href="profile.php">Profile</a>
+                <button class="logout-btn" onclick="window.location.href='logout.php'">Logout</button>
+            </div>
+        </header>
+
         <div class="welcome-message">
-            <h2>Welcome, <?php echo htmlspecialchars($_SESSION['name']); ?></h2>
-            <p>Role: <?php echo ucwords(str_replace('_', ' ', $role)); ?></p>
-            <?php if ($school_name): ?>
-                <p>School: <?php echo htmlspecialchars($school_name); ?></p>
-            <?php endif; ?>
+            <h2>Your Complaints</h2>
+            <p>Use filters to find specific records and manage updates quickly.</p>
         </div>
 
-        <h3>Your Complaints</h3>
+        <?php if ($flashSuccess !== ''): ?>
+            <div class="success-message"><?php echo htmlspecialchars($flashSuccess); ?></div>
+        <?php endif; ?>
+
         <form method="GET" class="filters">
             <div>
                 <label for="search">Search</label>
@@ -296,27 +135,31 @@ function dashboardQuery(array $filters, array $overrides = []): string
                     <option value="hostel" <?php echo $filters['type'] === 'hostel' ? 'selected' : ''; ?>>Hostel</option>
                 </select>
             </div>
-            <div>
-                <label for="role">Role</label>
-                <select id="role" name="role">
-                    <option value="">All</option>
-                    <option value="program_chair" <?php echo $filters['role'] === 'program_chair' ? 'selected' : ''; ?>>Program Chair</option>
-                    <option value="deputy_registrar" <?php echo $filters['role'] === 'deputy_registrar' ? 'selected' : ''; ?>>Deputy Registrar</option>
-                    <option value="campus_director" <?php echo $filters['role'] === 'campus_director' ? 'selected' : ''; ?>>Campus Director</option>
-                    <option value="hostel_authority" <?php echo $filters['role'] === 'hostel_authority' ? 'selected' : ''; ?>>Hostel Authority</option>
-                </select>
-            </div>
-            <div>
-                <label for="school">School</label>
-                <select id="school" name="school">
-                    <option value="">All</option>
-                    <?php foreach ($schools as $school): ?>
-                        <option value="<?php echo (int) $school['school_id']; ?>" <?php echo (int) ($filters['school'] ?? 0) === (int) $school['school_id'] ? 'selected' : ''; ?>>
-                            <?php echo htmlspecialchars((string) $school['school_name']); ?>
-                        </option>
-                    <?php endforeach; ?>
-                </select>
-            </div>
+            <?php if ($role !== 'program_chair'): ?>
+                <div>
+                    <label for="role">Role</label>
+                    <select id="role" name="role">
+                        <option value="">All</option>
+                        <option value="program_chair" <?php echo $filters['role'] === 'program_chair' ? 'selected' : ''; ?>>Program Chair</option>
+                        <option value="deputy_registrar" <?php echo $filters['role'] === 'deputy_registrar' ? 'selected' : ''; ?>>Deputy Registrar</option>
+                        <option value="campus_director" <?php echo $filters['role'] === 'campus_director' ? 'selected' : ''; ?>>Campus Director</option>
+                        <option value="hostel_authority" <?php echo $filters['role'] === 'hostel_authority' ? 'selected' : ''; ?>>Hostel Authority</option>
+                    </select>
+                </div>
+            <?php endif; ?>
+            <?php if ($role !== 'program_chair'): ?>
+                <div>
+                    <label for="school">School</label>
+                    <select id="school" name="school">
+                        <option value="">All</option>
+                        <?php foreach ($schools as $school): ?>
+                            <option value="<?php echo (int) $school['school_id']; ?>" <?php echo (int) ($filters['school'] ?? 0) === (int) $school['school_id'] ? 'selected' : ''; ?>>
+                                <?php echo htmlspecialchars((string) $school['school_name']); ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            <?php endif; ?>
             <div>
                 <label for="from_date">From Date</label>
                 <input id="from_date" type="date" name="from_date" value="<?php echo htmlspecialchars((string) ($filters['from_date'] ?? '')); ?>">
@@ -334,8 +177,12 @@ function dashboardQuery(array $filters, array $overrides = []): string
                 <input type="hidden" name="search" value="<?php echo htmlspecialchars($filters['search']); ?>">
                 <input type="hidden" name="status" value="<?php echo htmlspecialchars($filters['status']); ?>">
                 <input type="hidden" name="type" value="<?php echo htmlspecialchars($filters['type']); ?>">
-                <input type="hidden" name="role" value="<?php echo htmlspecialchars((string) ($filters['role'] ?? '')); ?>">
-                <input type="hidden" name="school" value="<?php echo htmlspecialchars((string) ($filters['school'] ?? '')); ?>">
+                <?php if ($role !== 'program_chair'): ?>
+                    <input type="hidden" name="role" value="<?php echo htmlspecialchars((string) ($filters['role'] ?? '')); ?>">
+                <?php endif; ?>
+                <?php if ($role !== 'program_chair'): ?>
+                    <input type="hidden" name="school" value="<?php echo htmlspecialchars((string) ($filters['school'] ?? '')); ?>">
+                <?php endif; ?>
                 <input type="hidden" name="from_date" value="<?php echo htmlspecialchars((string) ($filters['from_date'] ?? '')); ?>">
                 <input type="hidden" name="to_date" value="<?php echo htmlspecialchars((string) ($filters['to_date'] ?? '')); ?>">
                 <label for="per_page">Rows per page</label>
@@ -362,6 +209,7 @@ function dashboardQuery(array $filters, array $overrides = []): string
                 <p>No complaints assigned to you at this time.</p>
             </div>
         <?php else: ?>
+            <div class="table-wrap">
             <table class="complaints-table">
                 <thead>
                     <tr>
@@ -421,6 +269,7 @@ function dashboardQuery(array $filters, array $overrides = []): string
                     <?php endforeach; ?>
                 </tbody>
             </table>
+            </div>
 
             <div class="pagination">
                 <?php if ($pagination['page'] > 1): ?>

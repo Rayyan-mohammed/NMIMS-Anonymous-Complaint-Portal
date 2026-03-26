@@ -140,22 +140,8 @@ try {
     $stmt->execute();
     $complaint_id = $conn->insert_id;
 
-    // Handle escalation based on role
+    // Handle primary escalation based on role
     switch ($escalation) {
-        case 'programChair':
-            if (isset($_POST['programChair'])) {
-                $program_chair_ids = is_array($_POST['programChair']) ? $_POST['programChair'] : [$_POST['programChair']];
-                $sql = "INSERT IGNORE INTO complaint_assignments (complaint_id, assigned_to, role) VALUES (?, ?, 'program_chair')";
-                $stmt = $conn->prepare($sql);
-
-                foreach ($program_chair_ids as $program_chair_id) {
-                    $program_chair_id = (int) $program_chair_id;
-                    $stmt->bind_param("ii", $complaint_id, $program_chair_id);
-                    $stmt->execute();
-                }
-            }
-            break;
-            
         case 'deputyRegistrar':
             $sql = "INSERT INTO complaint_assignments (complaint_id, assigned_to, role) 
                     SELECT ?, user_id, 'deputy_registrar' 
@@ -175,6 +161,29 @@ try {
             $stmt->bind_param("i", $complaint_id);
             $stmt->execute();
             break;
+
+        case 'programChair':
+            $sql = "INSERT IGNORE INTO complaint_assignments (complaint_id, assigned_to, role)
+                SELECT ?, user_id, 'program_chair'
+                FROM users
+                WHERE role = 'program_chair' AND school_id = ? AND is_active = 1";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("ii", $complaint_id, $school_id);
+            $stmt->execute();
+            break;
+    }
+
+        // Optionally add program chair recipients when the primary escalation is deputy registrar or campus director.
+        if (($escalation === 'deputyRegistrar' || $escalation === 'campusDirector') && isset($_POST['programChair'])) {
+        $program_chair_ids = is_array($_POST['programChair']) ? $_POST['programChair'] : [$_POST['programChair']];
+        $sql = "INSERT IGNORE INTO complaint_assignments (complaint_id, assigned_to, role) VALUES (?, ?, 'program_chair')";
+        $stmt = $conn->prepare($sql);
+
+        foreach ($program_chair_ids as $program_chair_id) {
+            $program_chair_id = (int) $program_chair_id;
+            $stmt->bind_param("ii", $complaint_id, $program_chair_id);
+            $stmt->execute();
+        }
     }
 
     // For hostel complaints, assign selected hostel authorities,

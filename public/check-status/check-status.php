@@ -17,59 +17,21 @@ $updates = $state['updates'];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Check Complaint Status - NMIMS Complaint Portal</title>
-    <link rel="stylesheet" href="../assets/css/check-status/status.css?v=20260325b">
-    <style>
-        .status-badge {
-            display: inline-block;
-            padding: 6px 12px;
-            border-radius: 999px;
-            color: white;
-            font-weight: 700;
-            letter-spacing: 0.2px;
-        }
-        .status-pending {
-            background: linear-gradient(180deg, #d99906, #b47803);
-        }
-        .status-in_progress {
-            background: linear-gradient(180deg, #1a8095, #0d6577);
-        }
-        .status-in-progress {
-            background: linear-gradient(180deg, #1a8095, #0d6577);
-        }
-        .status-resolved {
-            background: linear-gradient(180deg, #2f9b63, #1f7d4d);
-        }
-        .updates-section {
-            margin-top: 20px;
-        }
-        .update-card {
-            background: rgba(255, 255, 255, 0.9);
-            border: 1px solid rgba(31, 41, 51, 0.08);
-            padding: 14px;
-            border-radius: 12px;
-            margin-bottom: 12px;
-        }
-        .update-header {
-            display: flex;
-            justify-content: space-between;
-            gap: 8px;
-            margin-bottom: 8px;
-            color: #5f6d80;
-            font-size: 0.95rem;
-        }
-    </style>
+    <link rel="stylesheet" href="../assets/css/check-status/status.css?v=20260326a">
 </head>
-<body>
-    <!-- Navigation Bar -->
-    <div class="navbar">
-        <div class="navbar-logo">
-            <img src="../assets/nmims_logo.jpg" alt="NMIMS Logo">
+<body class="public-page">
+    <header class="site-header">
+        <div class="navbar">
+            <div class="navbar-logo">
+                <img src="../assets/nmims_logo.jpg" alt="NMIMS Logo">
+            </div>
+            <div class="admin-login">
+                <a href="../admin/login.php">Admin Login</a>
+            </div>
         </div>
-        <div class="admin-login">
-            <a href="../admin/login.php">Admin Login</a>
-        </div>
-    </div>
-    
+    </header>
+
+    <main class="site-main">
     <div class="container">
         <!-- University Logo in Center -->
         <div class="university-logo">
@@ -142,10 +104,21 @@ $updates = $state['updates'];
             <a href="../index.php" class="back-link">Back to Complaint Portal</a>
         </div>
     </div>
+    </main>
 
-    <footer>
+    <footer class="site-footer">
         <div class="footer-container">
-            <span>2025 &copy;  STME All rights reserved.</span>
+            <div class="footer-brand">
+                <strong>NMIMS Anonymous Complaint Portal</strong>
+                <span>Track your complaint with secure reference-based lookup.</span>
+            </div>
+            <div class="footer-links">
+                <a href="../index.php">Complaint Portal</a>
+                <a href="../admin/login.php">Admin Login</a>
+            </div>
+            <div class="footer-copy">
+                <span>2026 &copy; STME. All rights reserved.</span>
+            </div>
         </div>
     </footer>
 </body>

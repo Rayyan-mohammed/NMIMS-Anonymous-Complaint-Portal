@@ -1,48 +1,106 @@
 @import url('../../assets/css/theme.css');
 
+.dashboard-container {
+    max-width: 1160px;
+}
+
 .dashboard-container h1 {
-    color: #8f162a;
-    margin-bottom: 8px;
+    color: var(--brand-600);
+    margin-bottom: 0.45rem;
 }
 
 .dashboard-container p {
-    color: #59667a;
+    color: var(--ink-600);
 }
 
 .complaint-list {
-    margin-top: 16px;
+    margin-top: 1rem;
+    border: 1px solid rgba(148, 163, 184, 0.32);
+    border-radius: 16px;
+    padding: 0.95rem;
+    background: linear-gradient(180deg, #ffffff, #f8fafc);
 }
 
 .complaint-item {
-    background: rgba(255, 255, 255, 0.88);
-    border: 1px solid rgba(31, 41, 51, 0.08);
+    background: rgba(255, 255, 255, 0.96);
+    border: 1px solid rgba(148, 163, 184, 0.3);
     border-radius: 14px;
-    padding: 14px;
-    margin-bottom: 12px;
+    padding: 0.85rem;
+    margin-bottom: 0.75rem;
+    box-shadow: var(--shadow-sm);
 }
 
 .complaint-item h3 {
-    color: #8f162a;
-    margin-bottom: 6px;
+    color: var(--brand-600);
+    margin-bottom: 0.4rem;
 }
 
 .complaint-item p {
-    color: #1f2933;
-    margin: 4px 0;
+    color: var(--ink-700);
+    margin: 0.3rem 0;
+}
+
+.complaint-item .status {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    padding: 0.3rem 0.65rem;
+    font-weight: 700;
+    font-size: 0.86rem;
+}
+
+.complaint-item .status.pending {
+    background: linear-gradient(150deg, #f59e0b, #b45309);
+    color: #fff;
+}
+
+.complaint-item .status.in-progress,
+.complaint-item .status.in_progress {
+    background: linear-gradient(150deg, #f43f5e, #be123c);
+    color: #fff;
+}
+
+.complaint-item .status.resolved {
+    background: linear-gradient(150deg, #14b8a6, #0f766e);
+    color: #fff;
+}
+
+.complaint-item .status.rejected {
+    background: linear-gradient(150deg, #ef4444, #b91c1c);
+    color: #fff;
 }
 
 .complaint-item .actions {
-    margin-top: 10px;
+    margin-top: 0.65rem;
     display: flex;
-    gap: 8px;
+    gap: 0.55rem;
+    flex-wrap: wrap;
 }
 
 .complaint-item .actions button.resolve {
-    background: linear-gradient(180deg, #1f8f56, #196f43);
+    background: linear-gradient(155deg, #14b8a6, #0f766e);
     color: #fff;
 }
 
 .complaint-item .actions button.reject {
-    background: linear-gradient(180deg, #b31b34, #8f162a);
+    background: linear-gradient(155deg, #ef4444, #b91c1c);
+    color: #fff;
+}
+
+.logout a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    padding: 0.62rem 1rem;
+    color: #fff;
+    text-decoration: none;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    background: linear-gradient(155deg, var(--brand-500), var(--brand-700));
+    box-shadow: 0 10px 20px rgba(186, 12, 47, 0.25);
+}
+
+.logout a:hover {
     color: #fff;
 }

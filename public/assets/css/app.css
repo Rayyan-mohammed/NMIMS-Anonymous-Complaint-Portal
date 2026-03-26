@@ -1,26 +1,181 @@
 @import url('./theme.css');
 
 .container {
-    max-width: 900px;
+    max-width: 940px;
+}
+
+.about-shell {
+    max-width: 1020px;
+}
+
+.about-portal-wrap {
+    border: 1px solid rgba(148, 163, 184, 0.28);
+    border-radius: 20px;
+    padding: 1.1rem;
+    background:
+        radial-gradient(circle at right top, rgba(186, 12, 47, 0.09), transparent 38%),
+        linear-gradient(180deg, #ffffff, #f8fafc);
+}
+
+.about-badge {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    padding: 0.34rem 0.72rem;
+    border: 1px solid rgba(186, 12, 47, 0.3);
+    color: var(--brand-600);
+    background: rgba(186, 12, 47, 0.08);
+    font-weight: 700;
+    margin-bottom: 0.65rem;
+}
+
+.about-hero-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 0.95rem;
+}
+
+.about-hero-copy {
+    border: 1px solid rgba(148, 163, 184, 0.24);
+    border-radius: 16px;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.68);
+}
+
+.about-hero-copy h1 {
+    margin-bottom: 0.4rem;
+}
+
+.about-hero-copy > p {
+    margin: 0;
+    color: var(--ink-600);
+    max-width: 68ch;
+}
+
+.about-pill-row {
+    margin-top: 0.85rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+}
+
+.about-pill-row span {
+    border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, 0.38);
+    padding: 0.34rem 0.62rem;
+    background: #fff;
+    font-size: 0.86rem;
+    font-weight: 600;
+    color: var(--ink-700);
+}
+
+.about-quick-card {
+    border: 1px solid rgba(148, 163, 184, 0.26);
+    border-radius: 16px;
+    padding: 0.95rem;
+    background: linear-gradient(155deg, #0f172a, #1e293b 70%, #334155);
+    color: #dbeafe;
+}
+
+.about-quick-card h2 {
+    margin: 0;
+    color: #fff;
+}
+
+.about-quick-card p {
+    margin: 0.35rem 0 0;
+    color: #cbd5e1;
+}
+
+.about-detail-grid {
+    margin-top: 0.95rem;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+}
+
+.about-flow-card {
+    border: 1px solid rgba(148, 163, 184, 0.3);
+    border-radius: 14px;
+    background: var(--surface-1);
+    padding: 0.95rem;
+}
+
+.about-flow-card h2 {
+    margin: 0 0 0.45rem;
+}
+
+.about-flow-card ol {
+    margin: 0;
+    padding-left: 1.2rem;
+    display: grid;
+    gap: 0.35rem;
+}
+
+.about-assurance-card p {
+    margin: 0;
+    color: var(--ink-600);
+}
+
+.about-cta-row {
+    margin-top: 0.75rem;
+    display: flex;
+    gap: 0.55rem;
+    flex-wrap: wrap;
+}
+
+.about-cta-row a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    padding: 0.48rem 0.86rem;
+    border: 1px solid rgba(148, 163, 184, 0.4);
+    color: var(--ink-900);
+    text-decoration: none;
+    font-weight: 600;
+    background: #fff;
+    box-shadow: 0 8px 16px rgba(15, 23, 42, 0.12);
+    transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.about-cta-row a:hover {
+    color: var(--ink-900);
+    transform: translateY(-1px);
+    border-color: rgba(186, 12, 47, 0.45);
+    box-shadow: 0 12px 22px rgba(15, 23, 42, 0.16);
+}
+
+.about-quick-card .about-cta-row a {
+    border-color: rgba(255, 255, 255, 0.32);
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    box-shadow: none;
+}
+
+.about-quick-card .about-cta-row a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.55);
 }
 
 header {
-    border-bottom: 1px solid rgba(31, 41, 51, 0.12);
-    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.34);
+    padding-bottom: 1rem;
 }
 
 header h1 {
-    font-size: 2rem;
+    color: var(--brand-600);
 }
 
 .form-group.anonymous-checkbox {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 10px 12px;
-    border: 1px dashed rgba(14, 90, 102, 0.34);
-    border-radius: 12px;
-    background: rgba(14, 90, 102, 0.06);
+    gap: 0.75rem;
+    padding: 0.85rem 0.95rem;
+    border: 1px dashed rgba(186, 12, 47, 0.45);
+    border-radius: 14px;
+    background: rgba(186, 12, 47, 0.06);
 }
 
 .form-group.anonymous-checkbox label {
@@ -28,140 +183,184 @@ header h1 {
     font-weight: 600;
 }
 
-input[type="checkbox"] {
-    accent-color: #0e5a66;
-    width: 18px;
-    height: 18px;
+
+#complaintForm {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.95rem 1rem;
+}
+
+#complaintForm .form-group,
+#complaintForm #formSummary {
+    grid-column: 1 / -1;
+}
+
+#complaintForm .form-group:has(#school),
+#complaintForm .form-group:has(#complaintType),
+#complaintForm .form-group:has(#academicSubType),
+#complaintForm .form-group:has(#hostelSubType),
+#complaintForm .form-group:has(#escalation) {
+    grid-column: span 1;
+}
+
+#complaintForm .form-group:has(#complaintDetails),
+#complaintForm .form-group:has(#studentIdentityContainer),
+#complaintForm .form-group:has(fieldset) {
+    grid-column: 1 / -1;
+}
+
+#academicSubTypeContainer,
+#hostelSubTypeContainer,
+#hostelContainer,
+#programChairContainer,
+#studentIdentityContainer {
+    display: none;
+}
+
+.program-chair-option {
+    display: none;
 }
 
 #confirmationMessage {
-    margin-top: 18px;
+    margin-top: 1.2rem;
     text-align: center;
-    padding: 20px;
+    padding: 1.2rem;
     display: none;
-    border: 1px solid rgba(31, 143, 86, 0.25);
-    border-radius: 14px;
-    background: rgba(31, 143, 86, 0.08);
+    border: 1px solid rgba(20, 184, 166, 0.28);
+    border-radius: 16px;
+    background: rgba(20, 184, 166, 0.08);
 }
 
 #confirmationMessage h2 {
-    color: #1f8f56;
-    margin-bottom: 8px;
+    color: var(--ok-500);
+    margin-bottom: 0.5rem;
 }
 
 #referenceNumber {
-    color: #7a1024;
+    color: var(--brand-600);
     font-family: var(--font-heading);
-    font-size: 1.1rem;
+    font-size: 1.05rem;
 }
 
 #copyReferenceBtn {
-    margin-top: 10px;
+    margin-top: 0.7rem;
     width: auto;
-    padding: 10px 16px;
-    background: linear-gradient(180deg, #1f8f56, #196f43);
 }
 
 #copyStatus {
     min-height: 20px;
-    margin-top: 8px;
+    margin-top: 0.45rem;
     font-weight: 700;
-    color: #196f43;
+    color: var(--ok-500);
 }
 
 #confirmationMessage .check-status a {
     display: inline-block;
-    margin-top: 10px;
-    padding: 10px 14px;
-    border-radius: 999px;
-    text-decoration: none;
-    color: #fff;
-    background: linear-gradient(180deg, #0e6d82, #0b5768);
+    margin-top: 0.6rem;
 }
 
 #newComplaintBtn {
-    margin-top: 14px;
+    margin-top: 0.85rem;
     width: auto;
-    padding: 10px 16px;
 }
 
 .university-logo {
     text-align: center;
-    margin: 0 0 16px;
-}
-
-.university-logo img {
-    max-width: 230px;
-    height: auto;
-    filter: drop-shadow(0 8px 15px rgba(20, 33, 48, 0.18));
+    margin: 0 0 1rem;
 }
 
 .form-group fieldset {
-    border: 1px solid rgba(31, 41, 51, 0.15);
-    border-radius: 10px;
-    padding: 10px 12px;
+    border: 1px solid rgba(148, 163, 184, 0.4);
+    border-radius: 14px;
+    padding: 0.8rem;
+    background: var(--surface-1);
 }
 
 .form-group legend {
     font-weight: 700;
-    color: #173452;
-    padding: 0 6px;
+    color: var(--ink-700);
+    padding: 0 0.35rem;
 }
 
 #hostelAuthorityCheckboxes label,
 #programChairCheckboxes label {
-    display: block;
-    margin: 6px 0;
+    display: flex;
+    align-items: center;
+    gap: 0.52rem;
+    margin: 0.42rem 0;
     font-weight: 600;
 }
 
 .form-summary {
-    margin-bottom: 14px;
-    padding: 12px;
-    border-radius: 12px;
-    border: 1px solid rgba(179, 27, 52, 0.26);
-    background: rgba(179, 27, 52, 0.1);
-    color: #6f1325;
+    margin-bottom: 0.75rem;
 }
 
 .form-summary ul {
-    margin: 8px 0 0 18px;
-}
-
-.form-summary.is-success {
-    border-color: rgba(31, 143, 86, 0.3);
-    background: rgba(31, 143, 86, 0.1);
-    color: #185b39;
+    margin: 0.45rem 0 0 1rem;
 }
 
 .field-error {
     display: none;
-    margin-top: 6px;
-    color: #851527;
+    margin-top: 0.4rem;
     font-weight: 700;
-    font-size: 0.92rem;
+    font-size: 0.9rem;
+    padding: 0.4rem 0.55rem;
 }
 
 select.is-invalid,
 input.is-invalid,
 textarea.is-invalid {
-    border-color: #9b122c;
-    box-shadow: 0 0 0 3px rgba(179, 27, 52, 0.18);
+    border-color: #dc2626;
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.16);
 }
 
-button:focus-visible,
-a:focus-visible,
-input:focus-visible,
-select:focus-visible,
-textarea:focus-visible {
-    outline: 3px solid #0e5a66;
-    outline-offset: 2px;
+.muted-helper {
+    display: block;
+    color: var(--ink-600);
+    margin-top: 0.35rem;
+}
+
+.identity-hint {
+    display: block;
+    margin-top: -0.3rem;
+    margin-bottom: 0.8rem;
+    color: var(--ink-600);
+}
+
+.inline-label-spaced {
+    margin-top: 0.6rem;
+}
+
+.button-row {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
 }
 
 button.is-loading {
-    opacity: 0.82;
+    opacity: 0.8;
 }
 
 button.is-success {
-    background: linear-gradient(180deg, #1f8f56, #196f43);
+    background: linear-gradient(145deg, #14b8a6, #0f766e);
+    box-shadow: 0 12px 24px rgba(20, 184, 166, 0.3);
+}
+
+@media (max-width: 820px) {
+    .about-hero-grid,
+    .about-detail-grid {
+        grid-template-columns: 1fr;
+    }
+
+    #complaintForm {
+        grid-template-columns: 1fr;
+    }
+
+    #complaintForm .form-group:has(#school),
+    #complaintForm .form-group:has(#complaintType),
+    #complaintForm .form-group:has(#academicSubType),
+    #complaintForm .form-group:has(#hostelSubType),
+    #complaintForm .form-group:has(#escalation) {
+        grid-column: 1 / -1;
+    }
 }

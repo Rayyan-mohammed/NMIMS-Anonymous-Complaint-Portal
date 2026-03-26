@@ -31,63 +31,7 @@ $complaint = $pageData['complaint'];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Status - NMIMS Complaint Portal</title>
-    <link rel="stylesheet" href="../assets/css/admin/login.css?v=20260325b">
-    <style>
-        .update-container {
-            max-width: 600px;
-            margin: 20px auto;
-            padding: 20px;
-            border: 1px solid rgba(14, 90, 102, 0.22);
-            background: linear-gradient(180deg, rgba(255,255,255,0.94), rgba(247,250,253,0.9));
-        }
-        .complaint-info {
-            background: rgba(14, 90, 102, 0.06);
-            border: 1px solid rgba(14, 90, 102, 0.15);
-            padding: 15px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        .form-group select, .form-group textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid rgba(31, 41, 51, 0.15);
-            border-radius: 10px;
-        }
-        .back-btn {
-            display: inline-block;
-            padding: 8px 16px;
-            background: linear-gradient(180deg, #0e6d82, #0b5768);
-            color: white;
-            text-decoration: none;
-            border-radius: 999px;
-            margin-bottom: 20px;
-        }
-        .submit-btn {
-            padding: 10px 20px;
-            background: linear-gradient(180deg, #2f9b63, #1f7d4d);
-            color: white;
-            border: none;
-            border-radius: 999px;
-            cursor: pointer;
-            font-weight: 700;
-        }
-        .brand-logo {
-            margin-bottom: 10px;
-        }
-        .brand-logo img {
-            max-width: 220px;
-            width: 100%;
-            height: auto;
-            filter: drop-shadow(0 8px 18px rgba(24, 42, 62, 0.2));
-        }
-    </style>
+    <link rel="stylesheet" href="../assets/css/admin/login.css?v=20260326a">
 </head>
 <body>
     <div class="update-container">
